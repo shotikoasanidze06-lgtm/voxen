@@ -1,0 +1,18 @@
+[Unit]
+Description=Voxen Relay (lets anyone join Voxen servers by name)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/voxen-relay/voxen_relay.py --domain voxenmc.duckdns.org --data /var/lib/voxen-relay
+WorkingDirectory=/opt/voxen-relay
+Restart=always
+RestartSec=3
+User=nobody
+Group=nogroup
+# ports below 1024 aren't used, so no extra privileges are needed
+AmbientCapabilities=
+StateDirectory=voxen-relay
+
+[Install]
+WantedBy=multi-user.target

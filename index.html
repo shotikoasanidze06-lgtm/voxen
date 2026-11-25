@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voxen — fast Minecraft launcher & free server hosting</title>
+<meta name="description" content="Voxen is a free Minecraft Java launcher that runs every version faster, with mods built in, and hosts servers on your own PC with an address everyone can join.">
+<link rel="icon" href="img/favicon.png">
+<meta property="og:title" content="Voxen — Minecraft, but faster">
+<meta property="og:description" content="Free launcher with FPS boost, mods and one-click servers.">
+<meta property="og:image" content="img/launcher-home.png">
+<script>
+/* ============ EDIT HERE ============ */
+window.VOXEN = {
+  download: "https://github.com/shotikoasanidze06-lgtm/voxen/releases/latest/download/VoxenSetup.exe",
+  version: "1.0.0",
+  size: "17 MB",
+  domain: "voxenmc.duckdns.org"   // server addresses look like  name.voxenmc.duckdns.org
+};
+/* =================================== */
+</script>
+<style>
+:root{--bg:#07080c;--bg2:#0c0e15;--panel:#12151f;--panel2:#191d2b;--line:#232839;--fg:#eef0f7;--muted:#9097ad;--dim:#5d637a;
+  --a1:#8b5cf6;--a2:#22d3ee;--ok:#34d399;--grad:linear-gradient(135deg,var(--a1),var(--a2))}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.55;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{width:min(1180px,92vw);margin:0 auto}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:rgba(7,8,12,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(35,40,57,.6)}
+nav .wrap{display:flex;align-items:center;gap:28px;height:66px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:3px;font-size:18px}
+.logo svg{width:30px;height:30px}
+nav .links{display:flex;gap:24px;margin-left:auto;color:var(--muted);font-size:14.5px;font-weight:600}
+nav .links a:hover{color:var(--fg)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 22px;border-radius:12px;font-weight:700;font-size:15px;transition:.15s;white-space:nowrap}
+.btn.pri{background:var(--grad);color:#fff;box-shadow:0 10px 30px rgba(139,92,246,.35)}
+.btn.pri:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(139,92,246,.5)}
+.btn.ghost{border:1px solid var(--line);color:var(--fg);background:rgba(18,21,31,.6)}
+.btn.ghost:hover{border-color:#3b4260}
+nav .btn{height:40px;padding:0 16px;font-size:14px}
+
+/* hero */
+.hero{position:relative;padding:90px 0 70px;overflow:hidden}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto;height:120%;background:radial-gradient(700px 420px at 75% 20%,rgba(139,92,246,.35),transparent 60%),radial-gradient(600px 400px at 10% 90%,rgba(34,211,238,.16),transparent 60%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.35);color:#c4b5fd;font-size:12.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+h1{font-size:clamp(40px,5.6vw,68px);line-height:1.02;letter-spacing:-1.5px;margin:20px 0 18px;font-weight:800}
+.lead{font-size:18.5px;color:#b8bdd0;max-width:520px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;align-items:center}
+.cta small{display:block;width:100%;color:var(--dim);font-size:13px;margin-top:2px}
+.shot{position:relative;border-radius:16px;overflow:hidden;border:1px solid #2a3046;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02)}
+.hero .shot{transform:perspective(1600px) rotateY(-9deg) rotateX(3deg);transition:.4s}
+.hero .shot:hover{transform:perspective(1600px) rotateY(-3deg) rotateX(1deg)}
+.glow{position:absolute;inset:10% 5%;background:var(--grad);filter:blur(80px);opacity:.28;z-index:-1}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:10px}
+.stat{padding:22px 22px;border-radius:16px;background:var(--panel);border:1px solid var(--line)}
+.stat b{display:block;font-size:30px;font-weight:800;letter-spacing:-.5px}
+.stat span{color:var(--muted);font-size:13.5px}
+
+section{padding:90px 0}
+.eyebrow{color:#a78bfa;font-weight:800;letter-spacing:1.6px;font-size:12.5px;text-transform:uppercase}
+h2{font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-1px;margin:10px 0 14px}
+.sub{color:var(--muted);font-size:17px;max-width:640px}
+.center{text-align:center}.center .sub{margin:0 auto}
+
+/* features */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.f{padding:26px;border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);transition:.2s}
+.f:hover{border-color:#3a3f5c;transform:translateY(-3px)}
+.f .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(139,92,246,.14);margin-bottom:16px;font-size:21px}
+.f h3{font-size:18px;margin-bottom:6px}
+.f p{color:var(--muted);font-size:14.5px}
+
+/* gallery */
+.gallery{margin-top:40px}
+.gtabs{display:flex;gap:8px;justify-content:center;margin-bottom:22px;flex-wrap:wrap}
+.gtabs button{font:inherit;color:var(--muted);background:none;border:1px solid var(--line);height:40px;padding:0 18px;border-radius:999px;font-weight:700;cursor:pointer}
+.gtabs button.on{color:#fff;background:rgba(139,92,246,.18);border-color:rgba(139,92,246,.6)}
+.gallery .shot{max-width:1000px;margin:0 auto}
+.gallery img{display:none}.gallery img.on{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:scale(.99)}to{opacity:1}}
+
+/* server */
+.server{background:linear-gradient(180deg,transparent,rgba(18,21,31,.7) 20%,rgba(18,21,31,.7) 80%,transparent)}
+.split{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:center}
+.addr{display:inline-flex;align-items:center;gap:12px;margin:22px 0 8px;padding:14px 18px;border-radius:14px;background:#0a0c12;border:1px solid rgba(52,211,153,.4);font-family:Consolas,"Cascadia Mono",monospace;font-size:18px}
+.addr i{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+.checks{list-style:none;margin-top:22px;display:grid;gap:12px}
+.checks li{display:flex;gap:12px;color:#c9cde0}
+.checks li::before{content:"✓";flex:none;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:rgba(52,211,153,.12);color:var(--ok);font-weight:800;font-size:13px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px;counter-reset:s}
+.step{padding:28px;border-radius:18px;background:var(--panel);border:1px solid var(--line);position:relative}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:22px;right:24px;font-size:54px;font-weight:800;line-height:1;color:rgba(139,92,246,.18)}
+.step h3{margin-bottom:6px}.step p{color:var(--muted);font-size:14.5px}
+
+/* download */
+.dl{position:relative;overflow:hidden;border-radius:26px;padding:56px;border:1px solid #2c3150;background:radial-gradient(700px 300px at 85% 0%,rgba(139,92,246,.35),transparent 60%),radial-gradient(500px 300px at 0% 100%,rgba(34,211,238,.18),transparent 60%),var(--panel);display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+.req{display:grid;gap:10px;font-size:14px;color:#c9cde0}
+.req div{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-radius:12px;background:rgba(7,8,12,.5);border:1px solid var(--line)}
+.req span{color:var(--muted)}
+.note{margin-top:18px;font-size:13px;color:var(--dim);max-width:560px}
+
+/* faq */
+.faq{max-width:820px;margin:40px auto 0;display:grid;gap:10px}
+details{border-radius:14px;background:var(--panel);border:1px solid var(--line);padding:0 20px}
+summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:700;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:var(--muted);font-size:20px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);padding-bottom:18px;font-size:15px}
+
+footer{border-top:1px solid var(--line);padding:36px 0 48px;color:var(--dim);font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+
+.reveal{opacity:0;transform:translateY(18px);transition:.7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:920px){
+  .hero .wrap,.split,.dl{grid-template-columns:1fr}
+  .hero .shot{transform:none}
+  .features,.steps{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  nav .links{display:none}
+  .dl{padding:34px}
+}
+@media (max-width:600px){.features,.steps,.stats{grid-template-columns:1fr}section{padding:64px 0}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="#"><svg viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><path d="M32 4l24 14v28L32 60 8 46V18z" fill="url(#g)"/><path d="M32 4l24 14-24 14L8 18z" fill="#fff" opacity=".35"/><path d="M32 32v28L8 46V18z" fill="#000" opacity=".18"/></svg><span class="grad-text">VOXEN</span></a>
+  <div class="links"><a href="#features">Features</a><a href="#server">Servers</a><a href="#download">Download</a><a href="#faq">FAQ</a></div>
+  <a class="btn pri" data-download href="#download">Download</a>
+</div></nav>
+
+<header class="hero">
+  <canvas id="cubes"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="tag">⚡ Free · Minecraft Java Edition</span>
+      <h1>Minecraft,<br><span class="grad-text">but faster.</span></h1>
+      <p class="lead">Voxen is a free launcher that runs every Minecraft version with a performance boost built in, and lets you host a server on your own PC that anyone can join.</p>
+      <div class="cta">
+        <a class="btn pri" data-download href="#download"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>Download for Windows</a>
+        <a class="btn ghost" href="#server">Host a server →</a>
+        <small><span data-version></span> · <span data-size></span> · Windows 10 / 11 · no Java needed</small>
+      </div>
+    </div>
+    <div style="position:relative"><div class="glow"></div><div class="shot"><img src="img/launcher-home.png" alt="The Voxen launcher" width="1124" height="681"></div></div>
+  </div>
+</header>
+
+<div class="wrap"><div class="stats reveal">
+  <div class="stat"><b class="grad-text">+36%</b><span>FPS vs. vanilla (345 vs. 254, measured)</span></div>
+  <div class="stat"><b>~14 s</b><span>from Play to the menu (was ~26 s)</span></div>
+  <div class="stat"><b>900+</b><span>versions, from Alpha to the newest</span></div>
+  <div class="stat"><b>1 click</b><span>to host a server for your friends</span></div>
+</div></div>
+
+<section id="features"><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">Launcher</div><h2>Everything set up for you</h2><p class="sub">No mod hunting, no Java installs, no config files. Pick a version and press Play.</p></div>
+  <div class="features">
+    <div class="f reveal"><div class="ic">⚡</div><h3>FPS Boost</h3><p>Sodium, Lithium, FerriteCore and more install automatically for every version that supports them, with graphics settings tuned for speed.</p></div>
+    <div class="f reveal"><div class="ic">🚀</div><h3>Fast start</h3><p>A lean mod set, a Java startup cache and our own Voxen Boost mod cut the waiting. Minecraft's 2-second logo fade is gone.</p></div>
+    <div class="f reveal"><div class="ic">🧊</div><h3>Every version</h3><p>Releases, snapshots, beta and alpha. Voxen downloads the right Java (8, 17, 21 or 25) by itself.</p></div>
+    <div class="f reveal"><div class="ic">🧩</div><h3>Mods tab</h3><p>Search thousands of mods from Modrinth (and CurseForge). Filter by FPS, PvP, Utility, Adventure and more; dependencies install themselves.</p></div>
+    <div class="f reveal"><div class="ic">⏩</div><h3>Continue</h3><p>Jump straight back into your last world, skipping the menus. Each version keeps its own worlds and settings.</p></div>
+    <div class="f reveal"><div class="ic">🧹</div><h3>Clean game menus</h3><p>The pause menu loses the Report Bugs, Feedback and Player Reporting buttons. Just your game.</p></div>
+  </div>
+  <div class="gallery reveal">
+    <div class="gtabs"><button class="on" data-g="0">Launcher</button><button data-g="1">Mods</button><button data-g="2">Performance</button><button data-g="3">In-game menu</button></div>
+    <div class="shot"><img class="on" src="img/launcher-home.png" alt="Launcher home" loading="lazy"><img src="img/launcher-mods.png" alt="Mods tab" loading="lazy"><img src="img/launcher-perf.png" alt="Performance settings" loading="lazy"><img src="img/pause-menu.png" alt="Clean pause menu" loading="lazy"></div>
+  </div>
+</div></section>
+
+<section id="server" class="server"><div class="wrap split">
+  <div class="reveal">
+    <div class="eyebrow">Voxen Server</div>
+    <h2>Host a server on your PC.<br>Anyone can join.</h2>
+    <p class="sub">Create a server, press Start, and send your friends an address like this. No router settings, no VPN, nothing else to switch on.</p>
+    <div class="addr"><i></i><span><span style="color:#fff">survival</span>.<span data-domain></span></span></div>
+    <ul class="checks">
+      <li>Vanilla, Fabric (mods) or Paper (plugins), any version</li>
+      <li>The address goes live by itself when the server starts</li>
+      <li>Upload maps (.zip) or use your own singleplayer worlds</li>
+      <li>Mods & plugins browser, players, whitelist, ops and bans</li>
+      <li>Live console, backups, and a safe stop that saves the world</li>
+    </ul>
+  </div>
+  <div class="reveal" style="position:relative"><div class="glow"></div><div class="shot"><img src="img/server-console.png" alt="Voxen Server" loading="lazy"></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">How it works</div><h2>Playing in three steps</h2></div>
+  <div class="steps">
+    <div class="step reveal"><h3>Download Voxen</h3><p>Run VoxenSetup.exe. It installs in seconds, with no admin rights needed.</p></div>
+    <div class="step reveal"><h3>Press Play</h3><p>Pick any version. Voxen downloads it with the right Java and the FPS Boost mods.</p></div>
+    <div class="step reveal"><h3>Invite friends</h3><p>Open Voxen Server, create a server, press Start and share its address.</p></div>
+  </div>
+</div></section>
+
+<section id="download"><div class="wrap">
+  <div class="dl reveal">
+    <div>
+      <div class="eyebrow">Download</div>
+      <h2>Get Voxen for Windows</h2>
+      <p class="sub">The launcher and Voxen Server in one installer. Free, no account needed.</p>
+      <div class="cta"><a class="btn pri" data-download href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>Download Voxen</a></div>
+      <p class="note">Windows may say “Windows protected your PC” because Voxen is new and not code-signed yet. Click <b>More info → Run anyway</b>.</p>
+    </div>
+    <div class="req">
+      <div><span>Version</span><b data-version></b></div>
+      <div><span>Size</span><b data-size></b></div>
+      <div><span>System</span><b>Windows 10 / 11, 64-bit</b></div>
+      <div><span>Memory</span><b>4 GB RAM or more</b></div>
+      <div><span>Java</span><b>Included, nothing to install</b></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="faq" style="padding-top:20px"><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">FAQ</div><h2>Questions</h2></div>
+  <div class="faq">
+    <details class="reveal"><summary>Is Voxen free?</summary><p>Yes. The launcher, the server app and the server addresses are free.</p></details>
+    <details class="reveal"><summary>Do I need to install Java?</summary><p>No. Voxen downloads the right Java for each Minecraft version from Mojang by itself.</p></details>
+    <details class="reveal"><summary>Can I join servers like Hypixel?</summary><p>Voxen uses offline profiles (just a name). That works for singleplayer, Voxen servers and servers that allow offline players. Official servers such as Hypixel need a purchased Minecraft account and the official launcher. Please support the game and buy it.</p></details>
+    <details class="reveal"><summary>How can anyone join my server without router settings?</summary><p>When you press Start, your PC connects out to the Voxen network, which home routers always allow. Players join your server's name address, and the Voxen network passes their connection through to your PC. Your server still runs on your own computer, so keep Voxen Server open while people play.</p></details>
+    <details class="reveal"><summary>Is my server safe from strangers?</summary><p>Anyone with the address can try to join. Turn on the Whitelist in your server's Options and add your friends in Players. Only they will get in.</p></details>
+    <details class="reveal"><summary>Where are my worlds saved? What happens when I uninstall?</summary><p>Everything lives in <code>%APPDATA%\.voxen</code>. Uninstalling removes the programs but keeps your worlds, versions and servers, so reinstalling or updating never loses anything.</p></details>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <a class="logo" href="#"><svg viewBox="0 0 64 64"><path d="M32 4l24 14v28L32 60 8 46V18z" fill="url(#g)"/></svg><span class="grad-text">VOXEN</span></a>
+  <span>Voxen is not affiliated with Mojang Studios or Microsoft. Minecraft is a trademark of Mojang Synergies AB.</span>
+</div></footer>
+
+<script>
+const V = window.VOXEN;
+document.querySelectorAll("[data-download]").forEach(a => a.href = V.download);
+document.querySelectorAll("[data-version]").forEach(e => e.textContent = "v" + V.version);
+document.querySelectorAll("[data-size]").forEach(e => e.textContent = V.size);
+document.querySelectorAll("[data-domain]").forEach(e => e.textContent = V.domain);
+
+/* gallery tabs */
+const gb = document.querySelectorAll(".gtabs button"), gi = document.querySelectorAll(".gallery img");
+gb.forEach(b => b.onclick = () => { gb.forEach(x => x.classList.toggle("on", x === b)); gi.forEach((im, i) => im.classList.toggle("on", i === +b.dataset.g)); });
+
+/* reveal on scroll */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+/* floating voxel cubes behind the hero */
+(() => {
+  const c = document.getElementById("cubes"), x = c.getContext("2d"); let W, H, cubes = [];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function rs() { const r = c.getBoundingClientRect(), d = devicePixelRatio || 1; W = c.width = r.width * d; H = c.height = r.height * d;
+    cubes = Array.from({ length: 26 }, () => ({ x: Math.random() * W, y: Math.random() * H, s: (8 + Math.random() * 22) * d, v: (.12 + Math.random() * .3) * d, a: .12 + Math.random() * .4 })); }
+  function cube(px, py, s, a) { x.globalAlpha = a;
+    x.fillStyle = "#a78bfa"; x.beginPath(); x.moveTo(px, py - s); x.lineTo(px + s, py - s / 2); x.lineTo(px, py); x.lineTo(px - s, py - s / 2); x.fill();
+    x.fillStyle = "#6d28d9"; x.beginPath(); x.moveTo(px - s, py - s / 2); x.lineTo(px, py); x.lineTo(px, py + s); x.lineTo(px - s, py + s / 2); x.fill();
+    x.fillStyle = "#0e7490"; x.beginPath(); x.moveTo(px + s, py - s / 2); x.lineTo(px, py); x.lineTo(px, py + s); x.lineTo(px + s, py + s / 2); x.fill(); }
+  function f() { x.clearRect(0, 0, W, H); for (const k of cubes) { if (!reduce) { k.y -= k.v; if (k.y < -60) k.y = H + 60; } cube(k.x, k.y, k.s, k.a); } x.globalAlpha = 1; if (!reduce) requestAnimationFrame(f); }
+  addEventListener("resize", rs); rs(); f();
+})();
+</script>
+</body>
+</html>

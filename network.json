@@ -1,0 +1,6 @@
+{
+  "relay": "voxenmc.duckdns.org",
+  "port": 25500,
+  "player_port": 25565,
+  "domain": "voxenmc.duckdns.org"
+}
